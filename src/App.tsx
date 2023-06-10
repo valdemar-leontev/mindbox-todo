@@ -7,7 +7,7 @@ import { TaskModel } from './models/task-models';
 
 export const App = () => {
   useEffect(() => {
-    if (localStorage.getItem("taskList") !== null) {
+    if (localStorage.getItem("taskList") === null) {
       const initialTaskList = [
         {
           id: 1,
