@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;1,100&family=Raleway:wght@100;300;700&display=swap');
+
+.app {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 10%;
+    position: absolute;
+
+    font-family: 'Montserrat', sans-serif;
+
+    legend {
+        font-size: 120px;
+        font-weight: 200;
+        color: rgb(233 217 216);
+    }
+}
+
+.main-container {
+    background-color: white;
+    width: 800px;
+    box-shadow: 0px 0 20px rgba(155, 155, 155, 0.575);
+
+    position: relative;
+    min-height: 100%;
+
+    .search-bar {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+        padding: 20px 0;
+
+        svg {
+            flex: 1;
+        }
+
+        input {
+            flex: 10;
+            border: none;
+            background-color: transparent;
+            outline: none;
+            font-size: 30px;
+            color: rgb(189, 189, 189);
+            font-style: italic;
+
+            &::placeholder {
+                color: rgb(189, 189, 189);
+            }
+        }
+    }
+
+    .no-data {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+
+        font-size: 30px;
+        font-weight: bold;
+        font-style: italic;
+        color: rgb(233 217 216);
+    }
+}

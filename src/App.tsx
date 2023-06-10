@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import './app.scss';
+import { CreationBar } from './components/creation-bar/creation-bar';
+import { Footer } from './components/footer/footer';
+import { TaskList } from './components/task-list/task-list';
+import { TaskModel } from './models/task-models';
 
-function App() {
+export const App = () => {
+  useEffect(() => {
+    if (localStorage.getItem("taskList") !== null) {
+      const initialTaskList = [
+        {
+          id: 1,
+          active: true,
+          content: "Тестовое задание"
+        },
+        {
+          id: 2,
+          active: false,
+          content: "Прекрасный код"
+        },
+        {
+          id: 3,
+          active: true,
+          content: "Покрытие тестами"
+        }
+      ] as TaskModel[];
+
+      localStorage.setItem("taskList", JSON.stringify(initialTaskList));
+    }
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <section className='app'>
+      <legend>todos</legend>
 
-export default App;
+      <div className='main-container'>
+        <CreationBar />
+
+        <TaskList />
+
+        <Footer />
+      </div>
+
+    </section>
+  )
+}

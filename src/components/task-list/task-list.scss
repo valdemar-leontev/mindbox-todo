@@ -1,0 +1,29 @@
+.task-list-container {
+    border-top: 1px solid rgb(189, 189, 189);
+    height: 218px;
+    overflow-y: auto;
+
+    .task-list-container__item {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        padding: 15px 10px;
+        font-size: 30px;
+        border-top: 1px solid rgb(189, 189, 189);
+
+        del {
+            color: rgb(189, 189, 189);
+        }
+
+        .task-list-container__active-task-indicator {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgb(204, 204, 204);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7bc1b1;
+        }
+    }
+}
