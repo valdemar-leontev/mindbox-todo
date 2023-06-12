@@ -18,10 +18,6 @@ export const Footer = () => {
       cursor: pointer;
 
       transition: all 0.3s ease;
-
-      &:hover {
-        color: ${appConstants.appearance.basePink};
-    }
 	`;
 
   const Filters = styled.section`
@@ -45,12 +41,9 @@ export const Footer = () => {
   const currentFilter = useSelector((state: any) => state.tasks.currentFilter);
   const dispatch = useDispatch();
 
-  // TODO: delete completed
   const deleteCompleted = () => {
     const updatedTaskList = taskList.filter((task: TaskModel) => task.active);
-
     dispatch(changeTaskList(updatedTaskList));
-
     localStorage.setItem('taskList', JSON.stringify(updatedTaskList));
   };
 
