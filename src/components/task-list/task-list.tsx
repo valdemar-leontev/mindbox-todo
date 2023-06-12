@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 export const TaskList = () => {
     const filteredTaskList = useSelector((state: any) => state.tasks.filteredTaskList);
     const taskList = useSelector((state: any) => state.tasks.originalTaskList);
-    const currentFilter = useSelector((state: any) => state.filter.currentFilter);
+    const currentFilter = useSelector((state: any) => state.tasks.currentFilter);
     const dispatch = useDispatch();
 
     useEffect(() => {

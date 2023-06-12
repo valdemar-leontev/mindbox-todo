@@ -1,13 +1,10 @@
 import styled from 'styled-components';
 import { appConstants } from '../../constants/app-constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeTaskList, filterTaskList } from '../../slices/tasksSlice';
-import { useState } from 'react';
+import { changeTaskList, filterTaskList, changeFilter } from '../../slices/tasksSlice';
 import { TaskModel } from '../../models/task-models';
 
 export const Footer = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
-
   const Wrapper = styled.section`
 		display: flex;
 		align-items: center;
@@ -44,11 +41,12 @@ export const Footer = () => {
     border: 1px solid ${props => props.$active ? appConstants.appearance.basePink : 'null'};
 	`;
 
-  const taskList = useSelector((state: any) => state.tasks.filteredTaskList);
+  const filteredTaskList = useSelector((state: any) => state.tasks.filteredTaskList);
+  const currentFilter = useSelector((state: any) => state.tasks.currentFilter);
   const dispatch = useDispatch();
 
   const deleteCompleted = () => {
-    const b = taskList.filter((task: TaskModel) => task.active);
+    const b = filteredTaskList.filter((task: TaskModel) => task.active);
 
     localStorage.setItem('taskList', JSON.stringify(b));
 
@@ -57,15 +55,15 @@ export const Footer = () => {
 
   return (
     <Wrapper>
-      <span>{taskList.length} items left</span>
+      <span>{filteredTaskList.length} items left</span>
 
       <Filters>
         {['All', 'Active', 'Completed'].map((filter, index) => {
           return <Filter
             key={index}
-            $active={filter === activeFilter}
+            $active={filter === currentFilter}
             onClick={() => {
-              setActiveFilter(filter);
+              dispatch(changeFilter(filter as any));
               dispatch(filterTaskList(filter as any));
             }}
           >
@@ -75,6 +73,6 @@ export const Footer = () => {
       </Filters>
 
       <div onClick={() => deleteCompleted()}>Clear completed</div>
-    </Wrapper>
+    </Wrapper >
   )
 }

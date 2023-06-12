@@ -28,7 +28,7 @@ export const App = () => {
 
       localStorage.setItem("taskList", JSON.stringify(initialTaskList));
     }
-  }, [])
+  }, []);
 
   return (
     <section className='app'>

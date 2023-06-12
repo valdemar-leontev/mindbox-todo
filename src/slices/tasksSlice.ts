@@ -11,6 +11,10 @@ export const tasksSlice = createSlice({
         currentFilter: 'All'
     },
     reducers: {
+        changeFilter: (state, filter: string | any) => {
+            state.currentFilter = filter.payload;
+        },
+
         changeTaskList: (state, taskList: TaskModel[] | any) => {
             state.originalTaskList = taskList.payload;
         },
@@ -58,6 +62,6 @@ export const tasksSlice = createSlice({
     },
 })
 
-export const { changeTaskList, changeActiveState, create, filterTaskList } = tasksSlice.actions;
+export const { changeTaskList, changeActiveState, create, filterTaskList, changeFilter } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
