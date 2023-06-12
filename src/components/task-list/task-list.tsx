@@ -49,10 +49,11 @@ export const TaskList = () => {
             {
                 filteredTaskList.length === 0 ?
                     <div className='no-data'>No data to display</div> :
-                    filteredTaskList.map((task: any) => {
+                    (filteredTaskList as TaskModel[]).map((task: any) => {
                         return <div key={task.id} className='task-list-container__item'>
                             <div className='app-flex-gap-30'>
                                 <div
+                                    style={task.active ? {} : { borderColor: '#7bc1b1' }}
                                     className='task-list-container__active-task-indicator'
                                     onClick={() => dispatch(changeActiveState(task.id))}
                                 >
@@ -72,7 +73,6 @@ export const TaskList = () => {
                                         /> :
                                         task.active ? <span id='task-content'>{task.content}</span> : <del id='task-content'>{task.content}</del>
                                 }
-
                             </div>
                             <div className='task-list-container__item-additional-actions app-flex-gap-10'>
                                 <TrashIcon
@@ -87,13 +87,15 @@ export const TaskList = () => {
                                             onClick={() => {
                                                 dispatch(changeTaskContent({ ...task, content: (document.querySelector(`#edit-task-${task.id}`) as any).value }))
                                                 setEditedTask({} as any);
-                                            }} /> :
+                                            }}
+                                        /> :
                                         <EditIcon
                                             onClick={() => {
                                                 onEditTaskHandler(task.id);
                                             }}
                                             size={appConstants.appearance.bigIconSize}
-                                            color={appConstants.appearance.darkGrey} />
+                                            color={appConstants.appearance.darkGrey}
+                                        />
                                 }
                             </div>
                         </div>
