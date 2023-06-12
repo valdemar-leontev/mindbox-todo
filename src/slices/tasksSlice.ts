@@ -1,7 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TaskModel } from '../models/task-models';
 
-let localStorageTaskList = JSON.parse(localStorage.getItem('taskList') || "[]");
+const initialTaskList = [
+    {
+        id: 1,
+        active: true,
+        content: "Тестовое задание"
+    },
+    {
+        id: 2,
+        active: false,
+        content: "Прекрасный код"
+    },
+    {
+        id: 3,
+        active: true,
+        content: "Покрытие тестами"
+    }
+] as TaskModel[];
+
+let localStorageTaskList = [] as any;
+
+if (localStorage.getItem("taskList") === null) {
+    localStorageTaskList = localStorage.setItem('taskList', JSON.stringify(initialTaskList));
+}
+
+localStorageTaskList = JSON.parse(localStorage.getItem('taskList') || "[]");
 
 export const tasksSlice = createSlice({
     name: 'tasks',
