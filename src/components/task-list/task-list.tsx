@@ -20,7 +20,7 @@ export const TaskList = () => {
 
     useEffect(() => {
         if (editedTask.id) {
-            const taskContentElement = document.querySelector(`[role=edit-task-${editedTask.id}]`);
+            const taskContentElement = document.querySelector(`#edit-task-${editedTask.id}`);
 
             if (taskContentElement) {
                 (taskContentElement as any).value = editedTask.content;
@@ -61,11 +61,11 @@ export const TaskList = () => {
                                 {
                                     editedTask && editedTask.id === task.id ?
                                         <input
-                                            role={`edit-task-${task.id}`}
+                                            id={`edit-task-${task.id}`}
                                             type="text"
                                             onKeyDown={(e) => {
                                                 if (e.key === 'Enter') {
-                                                    dispatch(changeTaskContent({ ...task, content: (document.querySelector(`[role=edit-task-${task.id}]`) as any).value }))
+                                                    dispatch(changeTaskContent({ ...task, content: (document.querySelector(`#edit-task-${task.id}`) as any).value }))
                                                     setEditedTask({} as any);
                                                 }
                                             }}
@@ -85,7 +85,7 @@ export const TaskList = () => {
                                             size={appConstants.appearance.bigIconSize}
                                             color={appConstants.appearance.darkGrey}
                                             onClick={() => {
-                                                dispatch(changeTaskContent({ ...task, content: (document.querySelector(`[role=edit-task-${task.id}]`) as any).value }))
+                                                dispatch(changeTaskContent({ ...task, content: (document.querySelector(`#edit-task-${task.id}`) as any).value }))
                                                 setEditedTask({} as any);
                                             }} /> :
                                         <EditIcon
