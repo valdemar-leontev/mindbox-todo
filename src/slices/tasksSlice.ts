@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { TaskModel } from '../models/task-models'
+import { createSlice } from '@reduxjs/toolkit';
+import { TaskModel } from '../models/task-models';
 
 let localStorageTaskList = JSON.parse(localStorage.getItem('taskList') || "[]");
 
@@ -24,6 +24,24 @@ export const tasksSlice = createSlice({
             }
 
             state.originalTaskList = [...state.originalTaskList, newTask.payload];
+
+            localStorage.setItem('taskList', JSON.stringify(state.originalTaskList));
+        },
+
+        changeTaskContent: (state, task: TaskModel | any) => {
+            if (!task || !task.payload.content || !task.payload.id) {
+                return;
+            }
+
+            const currentlyEditedTaskIndex = state.filteredTaskList.map((task: TaskModel) => task.id).indexOf(task.payload.id);
+            if (currentlyEditedTaskIndex >= 0) {
+                state.filteredTaskList[currentlyEditedTaskIndex].content = task.payload.content;
+            }
+
+            const currentlyEditedOriginalTaskIndex = state.originalTaskList.map((task: TaskModel) => task.id).indexOf(task.payload.id);
+            if (currentlyEditedOriginalTaskIndex >= 0) {
+                state.originalTaskList[currentlyEditedOriginalTaskIndex].content = task.payload.content;
+            }
 
             localStorage.setItem('taskList', JSON.stringify(state.originalTaskList));
         },
@@ -69,6 +87,6 @@ export const tasksSlice = createSlice({
     },
 })
 
-export const { changeTaskList, create, changeActiveState, filterTaskList, changeFilter, toggleCollapseMode } = tasksSlice.actions;
+export const { changeTaskList, create, changeActiveState, changeTaskContent, filterTaskList, changeFilter, toggleCollapseMode } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

@@ -10,10 +10,27 @@
 
     font-family: 'Montserrat', sans-serif;
 
+    ::selection {
+        background: rgb(233 217 216);
+        color: white;
+    }
+
     legend {
         font-size: 120px;
         font-weight: 200;
         color: rgb(233 217 216);
+    }
+
+    .app-flex-gap-30 {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .app-flex-gap-10 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 }
 
@@ -104,4 +121,5 @@
 
 svg {
     transition: all ease 0.4s;
+    cursor: pointer;
 }

@@ -6,10 +6,20 @@
     .task-list-container__item {
         display: flex;
         align-items: center;
-        gap: 30px;
+        justify-content: space-between;
         padding: 15px 10px;
         font-size: 30px;
         border-top: 1px solid rgb(189, 189, 189);
+
+        input {
+            border: none;
+            background-color: transparent;
+            outline: none;
+            font-size: 30px;
+            color: rgb(189, 189, 189);
+            font-style: italic;
+            min-width: 600px;
+        }
 
         del {
             color: rgb(189, 189, 189);
@@ -24,6 +34,19 @@
             align-items: center;
             justify-content: center;
             color: #7bc1b1;
+        }
+
+        .task-list-container__item-additional-actions {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: 0.4s ease-in-out all;
+        }
+
+        &:hover {
+            .task-list-container__item-additional-actions {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     }
 }

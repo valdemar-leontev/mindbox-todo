@@ -1,4 +1,4 @@
-import { ArrowDownIcon } from '../../icons/icon';
+import { ArrowDownIcon } from '../../icons/icons';
 import { appConstants } from '../../constants/app-constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useRef } from 'react';
