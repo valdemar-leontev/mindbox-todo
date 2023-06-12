@@ -95,7 +95,6 @@ export const TaskList = () => {
                                             size={appConstants.appearance.bigIconSize}
                                             color={appConstants.appearance.darkGrey} />
                                 }
-
                             </div>
                         </div>
                     })
