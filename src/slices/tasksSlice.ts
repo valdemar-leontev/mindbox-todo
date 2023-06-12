@@ -27,6 +27,8 @@ export const tasksSlice = createSlice({
             }
 
             completedTask.active = !completedTask.active
+
+            localStorage.setItem('taskList', JSON.stringify(state.originalTaskList));
         },
 
         create: (state, newTask: TaskModel | any) => {
