@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { appConstants } from '../../constants/app-constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeTaskList, filterTaskList } from '../../slices/tasksSlice';
-import { changeFilter } from '../../slices/filtersSlice';
 import { useState } from 'react';
 import { TaskModel } from '../../models/task-models';
 
