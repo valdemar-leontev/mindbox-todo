@@ -26,7 +26,7 @@ export const TaskList = () => {
             default:
                 break;
         }
-    }, [currentFilter, taskList])
+    }, [currentFilter, taskList]);
 
     return (
         <div className='task-list-container'>
