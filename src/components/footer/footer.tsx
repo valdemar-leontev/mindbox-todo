@@ -11,7 +11,6 @@ export const Footer = () => {
 		justify-content: space-between;
     height: 50px;
     border-top: 1px solid rgb(189, 189, 189);
-    border-bottom: 1px solid rgb(189, 189, 189);
     padding: 0 20px;
     color: grey;  
 
@@ -41,16 +40,18 @@ export const Footer = () => {
     border: 1px solid ${props => props.$active ? appConstants.appearance.basePink : 'null'};
 	`;
 
+  const taskList = useSelector((state: any) => state.tasks.originalTaskList);
   const filteredTaskList = useSelector((state: any) => state.tasks.filteredTaskList);
   const currentFilter = useSelector((state: any) => state.tasks.currentFilter);
   const dispatch = useDispatch();
 
+  // TODO: delete completed
   const deleteCompleted = () => {
-    const b = filteredTaskList.filter((task: TaskModel) => task.active);
+    const updatedTaskList = taskList.filter((task: TaskModel) => task.active);
 
-    localStorage.setItem('taskList', JSON.stringify(b));
+    dispatch(changeTaskList(updatedTaskList));
 
-    dispatch(changeTaskList(b));
+    localStorage.setItem('taskList', JSON.stringify(updatedTaskList));
   };
 
   return (

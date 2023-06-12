@@ -64,3 +64,44 @@
         color: rgb(233 217 216);
     }
 }
+
+
+
+
+.work-container {
+    min-height: 100%;
+    background-color: aqua;
+
+    transition: all ease-in-out 1s;
+}
+
+.collapse {
+    min-height: 0%;
+
+    transition: all ease-in-out 1s;
+}
+
+
+/* Стили для полосы прокрутки */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* Стили для ползунка (бегунка) полосы прокрутки */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(transparent, rgb(233, 217, 216));
+    border-radius: 0 0 5px 5px;
+}
+
+/* Стили для кнопок прокрутки (стрелок) */
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+svg {
+    transition: all ease 0.4s;
+}

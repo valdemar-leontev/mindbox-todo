@@ -8,27 +8,12 @@ export const tasksSlice = createSlice({
     initialState: {
         originalTaskList: localStorageTaskList,
         filteredTaskList: localStorageTaskList,
-        currentFilter: 'All'
+        currentFilter: 'All',
+        collapseMode: false
     },
     reducers: {
-        changeFilter: (state, filter: string | any) => {
-            state.currentFilter = filter.payload;
-        },
-
         changeTaskList: (state, taskList: TaskModel[] | any) => {
             state.originalTaskList = taskList.payload;
-        },
-
-        changeActiveState: (state, id: number | any) => {
-            const completedTask = state.originalTaskList.find((task: TaskModel) => task.id === id.payload);
-
-            if (!completedTask) {
-                return;
-            }
-
-            completedTask.active = !completedTask.active
-
-            localStorage.setItem('taskList', JSON.stringify(state.originalTaskList));
         },
 
         create: (state, newTask: TaskModel | any) => {
@@ -39,6 +24,18 @@ export const tasksSlice = createSlice({
             }
 
             state.originalTaskList = [...state.originalTaskList, newTask.payload];
+
+            localStorage.setItem('taskList', JSON.stringify(state.originalTaskList));
+        },
+
+        changeActiveState: (state, id: number | any) => {
+            const completedTask = state.originalTaskList.find((task: TaskModel) => task.id === id.payload);
+
+            if (!completedTask) {
+                return;
+            }
+
+            completedTask.active = !completedTask.active
 
             localStorage.setItem('taskList', JSON.stringify(state.originalTaskList));
         },
@@ -61,9 +58,17 @@ export const tasksSlice = createSlice({
                     break;
             }
         },
+
+        changeFilter: (state, filter: string | any) => {
+            state.currentFilter = filter.payload;
+        },
+
+        toggleCollapseMode: (state) => {
+            state.collapseMode = !state.collapseMode;
+        }
     },
 })
 
-export const { changeTaskList, changeActiveState, create, filterTaskList, changeFilter } = tasksSlice.actions;
+export const { changeTaskList, create, changeActiveState, filterTaskList, changeFilter, toggleCollapseMode } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

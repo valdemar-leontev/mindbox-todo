@@ -3,15 +3,19 @@ import { appConstants } from '../../constants/app-constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useRef } from 'react';
 import { TaskModel } from '../../models/task-models';
-import { create } from '../../slices/tasksSlice'
+import { create, toggleCollapseMode } from '../../slices/tasksSlice'
 
 export const CreationBar = () => {
     const taskList = useSelector((state: any) => state.tasks.originalTaskList);
+    const collapseMode = useSelector((state: any) => state.tasks.collapseMode);
     const dispatch = useDispatch();
     const inputRef = useRef(null);
 
     const getNextId = useCallback(() => {
-        const maxId = Math.max(...taskList.map((task: TaskModel) => task.id));
+        let maxId = 0;
+        if (taskList.length > 0) {
+            maxId = Math.max(...taskList.map((task: TaskModel) => task.id));
+        }
 
         return maxId + 1
     }, [taskList]);
@@ -28,7 +32,12 @@ export const CreationBar = () => {
 
     return (
         <div className='search-bar'>
-            <ArrowDownIcon size={appConstants.appearance.bigIconSize} color={appConstants.appearance.darkGrey} />
+            <ArrowDownIcon
+                style={collapseMode ? { transform: 'rotate(180deg)' } : {}}
+                onClick={() => dispatch(toggleCollapseMode())}
+                size={appConstants.appearance.bigIconSize}
+                color={appConstants.appearance.darkGrey}
+            />
             <input
                 ref={inputRef}
                 type="text"
