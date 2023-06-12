@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { appConstants } from '../../constants/app-constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeTaskList } from '../../slices/tasksSlice';
+import { changeTaskList, filterTaskList } from '../../slices/tasksSlice';
 import { changeFilter } from '../../slices/filtersSlice';
 import { useState } from 'react';
 import { TaskModel } from '../../models/task-models';
@@ -45,7 +45,7 @@ export const Footer = () => {
     border: 1px solid ${props => props.$active ? appConstants.appearance.basePink : 'null'};
 	`;
 
-  const taskList = useSelector((state: any) => state.tasks.reduxTaskList);
+  const taskList = useSelector((state: any) => state.tasks.filteredTaskList);
   const dispatch = useDispatch();
 
   const deleteCompleted = () => {
@@ -67,7 +67,7 @@ export const Footer = () => {
             $active={filter === activeFilter}
             onClick={() => {
               setActiveFilter(filter);
-              dispatch(changeFilter(filter as any));
+              dispatch(filterTaskList(filter as any));
             }}
           >
             {filter}

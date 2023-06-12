@@ -6,7 +6,7 @@ import { TaskModel } from '../../models/task-models';
 import { create } from '../../slices/tasksSlice'
 
 export const CreationBar = () => {
-    const taskList = useSelector((state: any) => state.tasks.reduxTaskList);
+    const taskList = useSelector((state: any) => state.tasks.originalTaskList);
     const dispatch = useDispatch();
     const inputRef = useRef(null);
 
@@ -14,7 +14,7 @@ export const CreationBar = () => {
         const maxId = Math.max(...taskList.map((task: TaskModel) => task.id));
 
         return maxId + 1
-    }, [taskList])
+    }, [taskList]);
 
     const createTask = useCallback((taskContent: string) => {
         const newTask = {
