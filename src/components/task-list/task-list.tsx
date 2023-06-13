@@ -130,7 +130,9 @@ export const TaskList = () => {
                                 <TrashIcon
                                     onClick={() => deleteTask(task.id)}
                                     size={appConstants.appearance.bigIconSize}
-                                    color={appConstants.appearance.darkGrey} />
+                                    color={appConstants.appearance.darkGrey}
+                                    title='Delete task'
+                                />
                                 {
                                     editedTask && editedTask.id === task.id ?
                                         <CheckIcon
@@ -140,6 +142,7 @@ export const TaskList = () => {
                                                 dispatch(changeTaskContent({ ...task, content: (document.querySelector(`#edit-task-${task.id}`) as any).value }))
                                                 setEditedTask({} as any);
                                             }}
+                                            title='Save task'
                                         /> :
                                         <EditIcon
                                             onClick={() => {
@@ -147,6 +150,7 @@ export const TaskList = () => {
                                             }}
                                             size={appConstants.appearance.bigIconSize}
                                             color={appConstants.appearance.darkGrey}
+                                            title='Edit task'
                                         />
                                 }
                             </AdditionalActions>
