@@ -1,11 +1,12 @@
 import '@testing-library/jest-dom/extend-expect';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import React from 'react';
 import { Provider } from 'react-redux';
 import { App } from '../App';
 import store from '../store/store';
 import { Footer } from '../components/footer/footer';
+import { CreationBar } from '../components/creation-bar/creation-bar';
 
 describe('App', () => {
   it('should render todos text when rendered on screen with redux and provider setup', () => {
@@ -37,5 +38,27 @@ describe('Footer', () => {
       </Provider>,
     );
     expect(getByText("Clear completed")).toBeInTheDocument();
+  });
+});
+
+describe('CreationBar', () => {
+  it('Check input with placeholder', () => {
+    const { getByPlaceholderText } = render(
+      <Provider store={store}>
+        <CreationBar />
+      </Provider>,
+    );
+    expect(getByPlaceholderText("What needs to be done?")).toBeInTheDocument();
+  });
+
+  it('Check ArrowIcon', () => {
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <CreationBar />
+      </Provider>,
+    );
+    const arrowDownIcon = getByTestId('arrow-down-icon');
+
+    expect(arrowDownIcon).toBeInTheDocument();
   });
 });

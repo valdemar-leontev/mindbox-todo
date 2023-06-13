@@ -60,6 +60,7 @@ export const CreationBar = () => {
     return (
         <Wrapper>
             <ArrowDownIcon
+                data-testid='arrow-down-icon'
                 style={collapseMode ? { transform: 'rotate(180deg)' } : {}}
                 onClick={() => dispatch(toggleCollapseMode())}
                 size={appConstants.appearance.bigIconSize}
@@ -68,7 +69,7 @@ export const CreationBar = () => {
             <input
                 ref={inputRef}
                 type="text"
-                placeholder='What need to be done?'
+                placeholder='What needs to be done?'
                 onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                         if (inputRef && inputRef.current) {
