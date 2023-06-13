@@ -4,6 +4,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useRef } from 'react';
 import { TaskModel } from '../../models/task-models';
 import { create, toggleCollapseMode } from '../../slices/tasksSlice'
+import { styled } from 'styled-components';
+
+const Wrapper = styled.section`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding: 20px 0;
+
+    svg {
+        flex: 1;
+    }
+
+    input {
+        flex: 10;
+        border: none;
+        background-color: transparent;
+        outline: none;
+        font-size: 30px;
+        color: ${appConstants.appearance.darkGrey};
+        font-style: italic;
+
+        &::placeholder {
+            color: ${appConstants.appearance.darkGrey};
+        }
+    }
+`;
 
 export const CreationBar = () => {
     const taskList = useSelector((state: any) => state.tasks.originalTaskList);
@@ -31,7 +58,7 @@ export const CreationBar = () => {
     }, [dispatch, getNextId]);
 
     return (
-        <div className='search-bar'>
+        <Wrapper>
             <ArrowDownIcon
                 style={collapseMode ? { transform: 'rotate(180deg)' } : {}}
                 onClick={() => dispatch(toggleCollapseMode())}
@@ -52,6 +79,6 @@ export const CreationBar = () => {
                     }
                 }}
             />
-        </div>
+        </Wrapper>
     )
 }

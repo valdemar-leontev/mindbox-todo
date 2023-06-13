@@ -1,10 +1,64 @@
 import { CheckIcon, EditIcon, TrashIcon } from '../../icons/icons';
-import './task-list.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeActiveState, filterTaskList, changeTaskList, changeTaskContent } from '../../slices/tasksSlice';
 import { useCallback, useEffect, useState } from 'react';
 import { appConstants } from '../../constants/app-constants';
 import { TaskModel } from '../../models/task-models';
+import { styled } from 'styled-components';
+
+const Wrapper = styled.section`
+    border-top: 1px solid ${appConstants.appearance.darkGrey};
+    height: 218px;
+    overflow-y: auto;
+`;
+
+
+const AdditionalActions = styled.div`
+    opacity: 0;
+    transform: scale(0.5);
+    transition: 0.4s ease-in-out all;
+`;
+
+const TaskWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px;
+    font-size: 30px;
+    border-top: 1px solid ${appConstants.appearance.darkGrey};
+
+    del {
+        color: ${appConstants.appearance.darkGrey};
+    }
+
+    &:hover {
+        ${AdditionalActions} {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+`;
+
+const TaskIndicator = styled.div<{ $active?: boolean; }>`
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid ${props => !props.$active ? "#7bc1b1" : "rgb(204, 204, 204)"};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7bc1b1;
+`;
+
+const EditTaskInput = styled.input`
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 30px;
+    color: ${appConstants.appearance.darkGrey};
+    font-style: italic;
+    min-width: 600px;
+`;
 
 export const TaskList = () => {
     const filteredTaskList = useSelector((state: any) => state.tasks.filteredTaskList);
@@ -45,23 +99,21 @@ export const TaskList = () => {
     }, [taskList]);
 
     return (
-        <div className='task-list-container'>
+        <Wrapper>
             {
                 filteredTaskList.length === 0 ?
                     <div className='no-data'>No data to display</div> :
                     (filteredTaskList as TaskModel[]).map((task: any) => {
-                        return <div key={task.id} className='task-list-container__item'>
+                        return <TaskWrapper key={task.id}>
                             <div className='app-flex-gap-30'>
-                                <div
-                                    style={task.active ? {} : { borderColor: '#7bc1b1' }}
-                                    className='task-list-container__active-task-indicator'
+                                <TaskIndicator $active={task.active}
                                     onClick={() => dispatch(changeActiveState(task.id))}
                                 >
                                     {task.active ? null : <CheckIcon />}
-                                </div>
+                                </TaskIndicator>
                                 {
                                     editedTask && editedTask.id === task.id ?
-                                        <input
+                                        <EditTaskInput
                                             id={`edit-task-${task.id}`}
                                             type="text"
                                             onKeyDown={(e) => {
@@ -74,7 +126,7 @@ export const TaskList = () => {
                                         task.active ? <span id='task-content'>{task.content}</span> : <del id='task-content'>{task.content}</del>
                                 }
                             </div>
-                            <div className='task-list-container__item-additional-actions app-flex-gap-10'>
+                            <AdditionalActions className='app-flex-gap-10'>
                                 <TrashIcon
                                     onClick={() => deleteTask(task.id)}
                                     size={appConstants.appearance.bigIconSize}
@@ -97,10 +149,10 @@ export const TaskList = () => {
                                             color={appConstants.appearance.darkGrey}
                                         />
                                 }
-                            </div>
-                        </div>
+                            </AdditionalActions>
+                        </TaskWrapper>
                     })
             }
-        </div>
+        </Wrapper>
     )
 }

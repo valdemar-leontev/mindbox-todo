@@ -34,72 +34,6 @@
     }
 }
 
-.main-container {
-    background-color: white;
-    width: 800px;
-    box-shadow: 0px 0 20px rgba(155, 155, 155, 0.575);
-
-    position: relative;
-    min-height: 100%;
-
-    .search-bar {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        height: 50px;
-        padding: 20px 0;
-
-        svg {
-            flex: 1;
-        }
-
-        input {
-            flex: 10;
-            border: none;
-            background-color: transparent;
-            outline: none;
-            font-size: 30px;
-            color: rgb(189, 189, 189);
-            font-style: italic;
-
-            &::placeholder {
-                color: rgb(189, 189, 189);
-            }
-        }
-    }
-
-    .no-data {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        width: 100%;
-
-        font-size: 30px;
-        font-weight: bold;
-        font-style: italic;
-        color: rgb(233 217 216);
-    }
-}
-
-
-
-
-.work-container {
-    min-height: 100%;
-    background-color: aqua;
-
-    transition: all ease-in-out 1s;
-}
-
-.collapse {
-    min-height: 0%;
-
-    transition: all ease-in-out 1s;
-}
-
-
-/* Стили для полосы прокрутки */
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -108,13 +42,11 @@
     background-color: transparent;
 }
 
-/* Стили для ползунка (бегунка) полосы прокрутки */
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(transparent, rgb(233, 217, 216));
     border-radius: 0 0 5px 5px;
 }
 
-/* Стили для кнопок прокрутки (стрелок) */
 ::-webkit-scrollbar-button {
     display: none;
 }
