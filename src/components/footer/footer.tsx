@@ -3,6 +3,7 @@ import { appConstants } from '../../constants/app-constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeTaskList, filterTaskList, changeFilter } from '../../slices/tasksSlice';
 import { TaskModel } from '../../models/task-models';
+import React from 'react';
 
 export const Footer = () => {
   const Wrapper = styled.section`
