@@ -47,7 +47,7 @@ export const tasksSlice = createSlice({
                 return;
             }
 
-            state.originalTaskList = [...state.originalTaskList, newTask.payload];
+            state.originalTaskList = [newTask.payload, ...state.originalTaskList];
 
             localStorage.setItem('taskList', JSON.stringify(state.originalTaskList));
         },

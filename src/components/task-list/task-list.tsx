@@ -8,7 +8,7 @@ import { styled } from 'styled-components';
 
 const Wrapper = styled.section`
     border-top: 1px solid ${appConstants.appearance.darkGrey};
-    height: 218px;
+    height: 216px;
     overflow-y: auto;
 `;
 
